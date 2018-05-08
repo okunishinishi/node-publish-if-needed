@@ -3,6 +3,7 @@ node_js:
 - '8'
 install:
 - npm install
+- npm link .
 script:
-- ./ci/build.js
-- ./ci/test.js
+- npm run test
+- publish-if-needed

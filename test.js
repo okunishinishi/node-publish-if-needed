@@ -6,8 +6,8 @@
 const lib = require('./lib')
 const {equal, ok} = require('assert')
 
-describe('publish if needed', async () => {
-
+describe('publish if needed', async function () {
+  this.timeout(40000)
   it('utils.packageForDir', async () => {
     const pkg = await lib.utils.packageForDir(__dirname)
     ok(pkg)
@@ -22,6 +22,10 @@ describe('publish if needed', async () => {
   it('utils.publishedVersion', async () => {
     const version = await lib.utils.publishedVersion('objnest')
     ok(version)
+
+    {
+      await lib.utils.publishedVersion('__invalid_package_______')
+    }
   })
 })
 

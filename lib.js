@@ -8,11 +8,12 @@
  */
 'use strict'
 
-const {gt} = require('semver')
+const {gte} = require('semver')
 const findup = require('findup')
-const {exec} = require('child_process')
+const {exec, spawn} = require('child_process')
 const {promisify} = require('util')
 const path = require('path')
+const debug = require('debug')('publish-if-needed')
 const fs = require('fs')
 
 const readFileAsync = promisify(fs.readFile)
@@ -34,12 +35,26 @@ const utils = {
     return String(stdout).trim()
   },
   async publishedVersion (name) {
-    const {stdout} = await execAsync(`npm info ${name} version`)
-    return String(stdout).trim()
+    try {
+      const {stdout} = await execAsync(`npm info ${name} version`)
+      return String(stdout).trim()
+    } catch (e) {
+      const message = String(e.stderr)
+      const notFound = message.match('E404')
+      if (notFound) {
+        return null
+      }
+      throw new Error(message)
+    }
   },
   async doPublish (cwd) {
-    const {stdout} = await execAsync(`npm publish ${cwd}`)
-    return String(stdout).trim()
+    return await new Promise((resolve, reject) => {
+      const npm = spawn('npm', ['publish', cwd], {
+        stdio: 'inherit'
+      })
+      npm.on('close', () => resolve())
+      npm.on('error', (err) => reject(err))
+    })
   }
 }
 
@@ -51,17 +66,18 @@ async function publishIfNeeded (options = {}) {
   } = options
 
   const currentBranch = await utils.currentBranch(cwd)
+  debug('branch', {current: currentBranch, if: branch})
   if (currentBranch !== branch) {
     return false
   }
   const pkg = await utils.packageForDir(cwd)
   const publishedVersion = await utils.publishedVersion(pkg.name)
-  const isGreater = gt(pkg.version, publishedVersion)
-  if (!isGreater) {
+  debug('version', {published: publishedVersion, current: pkg.version})
+  const hasPublished = !!publishedVersion && gte(publishedVersion, pkg.version)
+  if (hasPublished) {
     return false
   }
-  const result = await utils.doPublish(cwd)
-  console.log(result)
+  await utils.doPublish(cwd)
   return true
 }
 
