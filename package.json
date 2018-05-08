@@ -1,0 +1,31 @@
+{
+  "name": "publish-if-needed",
+  "version": "1.0.0",
+  "description": "Publish to npm if needed",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "prepare": "fixpack"
+  },
+  "repository": "okunishinishi/node-publish-if-needed",
+  "keywords": [
+    "publish"
+  ],
+  "author": "Taka Okunishi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/okunishinishi/node-publish-if-needed/issues"
+  },
+  "homepage": "https://github.com/okunishinishi/node-publish-if-needed#readme",
+  "engines": {
+    "node": ">=8",
+    "npm": ">=5"
+  },
+  "devDependencies": {
+    "fixpack": "^2.3.1"
+  },
+  "dependencies": {
+    "findup": "^0.1.5",
+    "semver": "^5.5.0"
+  }
+}
