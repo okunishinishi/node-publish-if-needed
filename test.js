@@ -4,6 +4,7 @@
 'use strict'
 
 const lib = require('./lib')
+const index = require('./index')
 const {equal, ok} = require('assert')
 
 describe('publish if needed', async function () {
@@ -26,6 +27,10 @@ describe('publish if needed', async function () {
     {
       await lib.utils.publishedVersion('__invalid_package_______')
     }
+  })
+
+  it('index', async () => {
+    equal(typeof index, 'function')
   })
 })
 
