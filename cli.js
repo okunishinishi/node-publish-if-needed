@@ -4,7 +4,7 @@
  */
 'use strict'
 
-const lib = require('lib')
+const lib = require('./lib')
 const argv = require('yargs').argv
 
 lib({
