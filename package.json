@@ -24,6 +24,7 @@
   ],
   "license": "MIT",
   "main": "index.js",
+  "bin": "cli.js",
   "repository": "okunishinishi/node-publish-if-needed",
   "scripts": {
     "prepare": "fixpack",
