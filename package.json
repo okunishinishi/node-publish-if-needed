@@ -1,7 +1,7 @@
 {
   "name": "publish-if-needed",
   "description": "Publish to npm if needed",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Taka Okunishi",
   "bugs": {
     "url": "https://github.com/okunishinishi/node-publish-if-needed/issues"
