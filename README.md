@@ -1,5 +1,18 @@
 # publish-if-needed
 
+[![Build Status][bd_travis_shield_url]][bd_travis_url]
+[![npm Version][bd_npm_shield_url]][bd_npm_url]
+[![JS Standard][bd_standard_shield_url]][bd_standard_url]
+
+[bd_travis_url]: http://travis-ci.org/okunishinishi/node-objnest
+[bd_travis_shield_url]: http://img.shields.io/travis/okunishinishi/node-objnest.svg?style=flat
+[bd_npm_url]: http://www.npmjs.org/package/objnest
+[bd_npm_shield_url]: http://img.shields.io/npm/v/objnest.svg?style=flat
+[bd_standard_url]: http://standardjs.com/
+[bd_standard_shield_url]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg
+
+
+
 Publish npm package if 
 
 * Current branch is `master`
