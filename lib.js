@@ -31,7 +31,7 @@ const utils = {
     return JSON.parse(content)
   },
   async currentBranch (cwd) {
-    const {stdout, stderr} = await execAsync('git name-rev --name-only HEAD', {cwd})
+    const {stdout, stderr} = await execAsync('git symbolic-ref --short HEAD', {cwd})
     return String(stdout).trim()
   },
   async publishedVersion (name) {
