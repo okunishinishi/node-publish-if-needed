@@ -8,9 +8,9 @@
     "url": "https://github.com/okunishinishi/node-publish-if-needed/issues"
   },
   "dependencies": {
-    "debug": "^3.1.0",
+    "debug": "^4.1.0",
     "findup": "^0.1.5",
-    "semver": "^5.5.0",
+    "semver": "^5.6.0",
     "yargs": "^11.0.0"
   },
   "devDependencies": {
