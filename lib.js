@@ -8,10 +8,10 @@
  */
 'use strict'
 
-const {gte} = require('semver')
+const { gte } = require('semver')
 const findup = require('findup')
-const {exec, spawn} = require('child_process')
-const {promisify} = require('util')
+const { exec, spawn } = require('child_process')
+const { promisify } = require('util')
 const path = require('path')
 const debug = require('debug')('publish-if-needed')
 const fs = require('fs')
@@ -31,12 +31,20 @@ const utils = {
     return JSON.parse(content)
   },
   async currentBranch (cwd) {
-    const {stdout, stderr} = await execAsync('git symbolic-ref --short HEAD', {cwd})
-    return String(stdout).trim()
+    try {
+      const { stdout, stderr } = await execAsync('git symbolic-ref --short HEAD', { cwd })
+      return String(stdout).trim()
+    } catch (e) {
+      // symbolic-ref may fail on old git
+    }
+    {
+      const { stdout, stderr } = await execAsync('git rev-parse --abbrev-ref HEAD', { cwd })
+      return String(stdout).trim()
+    }
   },
   async publishedVersion (name) {
     try {
-      const {stdout} = await execAsync(`npm info ${name} version`)
+      const { stdout } = await execAsync(`npm info ${name} version`)
       return String(stdout).trim()
     } catch (e) {
       const message = String(e.stderr)
@@ -66,13 +74,13 @@ async function publishIfNeeded (options = {}) {
   } = options
 
   const currentBranch = await utils.currentBranch(cwd)
-  debug('branch', {current: currentBranch, if: branch})
+  debug('branch', { current: currentBranch, if: branch })
   if (currentBranch !== branch) {
     return false
   }
   const pkg = await utils.packageForDir(cwd)
   const publishedVersion = await utils.publishedVersion(pkg.name)
-  debug('version', {published: publishedVersion, current: pkg.version})
+  debug('version', { published: publishedVersion, current: pkg.version })
   const hasPublished = !!publishedVersion && gte(publishedVersion, pkg.version)
   if (hasPublished) {
     return false
