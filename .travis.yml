@@ -9,3 +9,10 @@ install:
 script:
 - npm run test
 - publish-if-needed
+deploy:
+  provider: npm
+  email: okunishinishi@gmail.com
+  api_key:
+    secure: 1mVTVKtpQ8x+drx7c/H5WyB00HDzxILoZ02IX6h+TQiqt6lh56wzRRPnIIAhLXSKmpzVwpIgx7jejrMj9lcpyninHXOKwwZ5D/ygYNjPDvIe2/ipk9Md+lUnlQAXj1zgSSfwVmTzyw2/iaqTD8euQlO0xJweVDfjIBOfjInseVTmFJLhiFGdgBfe3JIIJb9OkCs5mIRTJPyIVb8nun7jeUb5Wz2BW7iJ9GSZ5ebcVtGc21CVF5xtBuL7DgTxwcOEcTJxOpLNXzPJMfqQzz7IWE+Fhic50o/FcHPcA1c3Orci1ASbRXCk1x4/orkgt9mIXfsBTYFRfjHThTozWcA75kd6sjsZEzqWSPXjLpCqHNOaEh0agyIWNWQXUIT91dYXcSVcoQXUnOu1gpGwbFmeojyEsbWGe1BYpahJ66AgMOZqnqkkikRPshyOQfBGXPYIh/eFQVFFIPVfB73/T2Sd0uhlgJG2BQueS9K7QwBICOHmt1YesbWUxP6j9aMnMMlwwjdLOcVphgaURU6XU5jMHDo7xuitA7oqgsPUk8NnvdVIvmrfxEmmT7VsPUigG469emel/7dBUBZLsqRSUPJpswEEJBhZZVg/c63v34muvb2iXszOXjw9d5lIv/B4wYGOuRBhd5pt3J08AgMt480sbwcVA/VUK46QCddpfWET524=
+  on:
+    repo: okunishinishi/node-publish-if-needed
