@@ -76,6 +76,10 @@ async function publishIfNeeded (options = {}) {
   const currentBranch = await utils.currentBranch(cwd)
   debug('branch', { current: currentBranch, if: branch })
   if (currentBranch !== branch) {
+    console.debug('[publish-if-needed] Not in branch to publish', {
+      current: currentBranch,
+      expect: branch,
+    })
     return false
   }
   const pkg = await utils.packageForDir(cwd)
@@ -83,6 +87,10 @@ async function publishIfNeeded (options = {}) {
   debug('version', { published: publishedVersion, current: pkg.version })
   const hasPublished = !!publishedVersion && gte(publishedVersion, pkg.version)
   if (hasPublished) {
+    console.debug('[publish-if-needed] Current version is already published', {
+      current: pkg.version,
+      latest: publishedVersion,
+    })
     return false
   }
   await utils.doPublish(cwd)
