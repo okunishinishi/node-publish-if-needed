@@ -31,6 +31,10 @@ const utils = {
     return JSON.parse(content)
   },
   async currentBranch (cwd) {
+    const { TRAVIS_BRANCH } = process.env
+    if (TRAVIS_BRANCH) {
+      return TRAVIS_BRANCH
+    }
     try {
       const { stdout, stderr } = await execAsync('git symbolic-ref --short HEAD', { cwd })
       return String(stdout).trim()
