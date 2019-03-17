@@ -21,7 +21,7 @@ const findupAsync = promisify(findup)
 const execAsync = promisify(exec)
 
 const utils = {
-  async packageForDir (cwd) {
+  async packageForDir(cwd) {
     const basename = 'package.json'
     const dirname = await findupAsync(cwd, basename).catch((err) => {
       throw (`[publish-if-needed] package.json not found from ${cwd}`)
@@ -30,7 +30,7 @@ const utils = {
     const content = await readFileAsync(filename)
     return JSON.parse(content)
   },
-  async currentBranch (cwd) {
+  async currentBranch(cwd) {
     const { TRAVIS_BRANCH } = process.env
     if (TRAVIS_BRANCH) {
       return TRAVIS_BRANCH
@@ -46,7 +46,7 @@ const utils = {
       return String(stdout).trim()
     }
   },
-  async publishedVersion (name) {
+  async publishedVersion(name) {
     try {
       const { stdout } = await execAsync(`npm info ${name} version`)
       return String(stdout).trim()
@@ -59,7 +59,7 @@ const utils = {
       throw new Error(message)
     }
   },
-  async doPublish (cwd) {
+  async doPublish(cwd) {
     return await new Promise((resolve, reject) => {
       const npm = spawn('npm', ['publish', cwd], {
         stdio: 'inherit'
@@ -71,7 +71,7 @@ const utils = {
 }
 
 /** @lends publishIfNeeded */
-async function publishIfNeeded (options = {}) {
+async function publishIfNeeded(options = {}) {
   const {
     branch = 'master',
     cwd = process.cwd()

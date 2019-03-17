@@ -1,17 +1,17 @@
 {
   "name": "publish-if-needed",
   "description": "Publish to npm if needed",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "author": "Taka Okunishi",
   "bin": "cli.js",
   "bugs": {
     "url": "https://github.com/okunishinishi/node-publish-if-needed/issues"
   },
   "dependencies": {
-    "debug": "^4.1.0",
+    "debug": "^4.1.1",
     "findup": "^0.1.5",
     "semver": "^5.6.0",
-    "yargs": "^11.0.0"
+    "yargs": "^13.2.2"
   },
   "devDependencies": {
     "fixpack": "^2.3.1"
