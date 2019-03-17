@@ -92,8 +92,8 @@ async function publishIfNeeded(options = {}) {
   const hasPublished = !!publishedVersion && gte(publishedVersion, pkg.version)
   if (hasPublished) {
     console.debug('[publish-if-needed] Current version is already published', {
-      current: pkg.version,
-      latest: publishedVersion,
+      current: `${pkg.name}@${pkg.version}`,
+      latest: `${pkg.name}@${publishedVersion}`,
     })
     return false
   }
