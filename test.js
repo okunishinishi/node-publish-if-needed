@@ -29,6 +29,23 @@ describe('publish if needed', async function () {
     }
   })
 
+  it('utils.isPullRequest', async () => {
+    const current = process.env.TRAVIS_PULL_REQUEST
+    {
+      process.env.TRAVIS_PULL_REQUEST = ''
+      ok(!lib.utils.isPullRequest())
+    }
+    {
+      process.env.TRAVIS_PULL_REQUEST = 'false'
+      ok(!lib.utils.isPullRequest())
+    }
+    {
+      process.env.TRAVIS_PULL_REQUEST = '1'
+      ok(lib.utils.isPullRequest())
+    }
+    process.env.TRAVIS_PULL_REQUEST = current
+  })
+
   it('index', async () => {
     equal(typeof index, 'function')
   })

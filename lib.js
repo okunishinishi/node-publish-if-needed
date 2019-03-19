@@ -46,6 +46,12 @@ const utils = {
       return String(stdout).trim()
     }
   },
+  isPullRequest() {
+    // https://docs.travis-ci.com/user/environment-variables/
+    // TRAVIS_PULL_REQUEST is set to the pull request number if the current job is a pull request build, or `false` if it’s not
+    const { TRAVIS_PULL_REQUEST } = process.env
+    return Boolean(TRAVIS_PULL_REQUEST) && TRAVIS_PULL_REQUEST !== 'false'
+  },
   async publishedVersion(name) {
     try {
       const { stdout } = await execAsync(`npm info ${name} version`)
@@ -84,6 +90,10 @@ async function publishIfNeeded(options = {}) {
       current: currentBranch,
       expect: branch,
     })
+    return false
+  }
+  if (utils.isPullRequest()) {
+    console.debug(`[publish-if-needed] Not to publish in a pull request`)
     return false
   }
   const pkg = await utils.packageForDir(cwd)
