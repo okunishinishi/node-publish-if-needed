@@ -1,7 +1,7 @@
 {
   "name": "publish-if-needed",
   "description": "Publish to npm if needed",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": "Taka Okunishi",
   "bin": "cli.js",
   "bugs": {
