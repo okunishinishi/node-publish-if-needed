@@ -3,7 +3,7 @@
  * @function publishIfNeeded
  * @param {Object} [options={}]
  * @param {string} [options.cwd=process.cwd()]
- * @param {string} [options.branch='master']
+ * @param {string} [options.branch='main']
  * @returns {boolean} Published or not
  */
 'use strict'
@@ -79,7 +79,7 @@ const utils = {
 /** @lends publishIfNeeded */
 async function publishIfNeeded(options = {}) {
   const {
-    branch = 'master',
+    branch = 'main',
     cwd = process.cwd()
   } = options
 
