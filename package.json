@@ -20,6 +20,10 @@
     "node": ">=8",
     "npm": ">=5"
   },
+  "files": [
+    "*.js",
+    "!test.js"
+  ],
   "homepage": "https://github.com/okunishinishi/node-publish-if-needed#readme",
   "keywords": [
     "publish"
@@ -30,9 +34,5 @@
   "scripts": {
     "prepare": "fixpack",
     "test": "mocha"
-  },
-  "files": [
-    "*.js",
-    "!test.js"
-  ]
+  }
 }
