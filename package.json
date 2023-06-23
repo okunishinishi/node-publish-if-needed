@@ -10,7 +10,7 @@
   "dependencies": {
     "debug": "^4.1.1",
     "findup": "^0.1.5",
-    "semver": "^5.6.0",
+    "semver": "^7.5.2",
     "yargs": "^13.2.2"
   },
   "devDependencies": {
